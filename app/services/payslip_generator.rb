@@ -20,31 +20,38 @@ class PayslipGenerator
   	# tier_five = 40%
 
 		p "Monthly Payslip for: #{@employee_name}"
-		p "Gross Monthly Income: $#{gross_monthly_income(annual_salary_cents)}" 
-	 	p "Monthly Income Tax: $#{monthly_income_tax(annual_salary_cents)}"
-	 	p "Net Monthly Income: $#{net_monthly_income(annual_salary_cents)}"
+		p "Gross Monthly Income: $#{'%2.f' % gross_monthly_income(annual_salary_cents)}" 
+	 	p "Monthly Income Tax: $#{'%2.f' % monthly_income_tax(annual_salary_cents)}"
+	 	p "Net Monthly Income: $#{'%2.f' % net_monthly_income(annual_salary_cents)}"
   end
 
   def gross_monthly_income(annual_salary_cents)
-  	return '%.2f' % ((annual_salary_cents / 12).to_i / 100.0)
+  	return (annual_salary_cents / 12).to_i / 100.0
   end
 
   def monthly_income_tax(annual_salary_cents)
-  	case annual_salary_cents
-  	when 0..2000000
-  		return 0 * gross_monthly_income(annual_salary_cents).to_f
-  	when 2000100..4000000
-  		return '%.2f' % (gross_monthly_income(annual_salary_cents).to_f * 10 / 100)
-  	when 4000100..8000000
-  		return '%.2f' % (gross_monthly_income(annual_salary_cents).to_f * 20 / 100)
-  	when 8000100..18000000
-  		return '%.2f' % (gross_monthly_income(annual_salary_cents).to_f * 30 / 100)
-  	else
-  		if annual_salary_cents >= 18000100
-  			return '%.2f' % (gross_monthly_income(annual_salary_cents).to_f * 40 / 100)
-  		else
-  			return "Not a valid number"
-  		end
+		tier_one_cents = 2000000
+		tier_two_cents = 4000000
+		tier_three_cents = 8000000
+		tier_four_cents = 18000000
+
+		if annual_salary_cents <= tier_one_cents
+			0
+		elsif annual_salary_cents <= tier_two_cents
+			gross_monthly_income(annual_salary_cents).to_f * 0.1
+		elsif annual_salary_cents <= tier_three_cents
+			annual_tax_cents = (tier_one_cents * 0) + ((tier_two_cents - tier_one_cents) * 0.1) + ((annual_salary_cents - tier_two_cents) * 0.2)
+			annual_tax_cents / 100 / 12 #convert to month and dollars
+		elsif annual_salary_cents <= tier_four_cents
+			annual_tax_cents = (tier_one_cents * 0) + ((tier_two_cents - tier_one_cents) * 0.1) + ((tier_three_cents - tier_two_cents) * 0.2) + 
+														((annual_salary_cents - tier_three_cents) * 0.3)
+			annual_tax_cents / 100 / 12
+		elsif annual_salary_cents > tier_four_cents
+			annual_tax_cents = (tier_one_cents * 0) + ((tier_two_cents - tier_one_cents) * 0.1) + ((tier_three_cents - tier_two_cents) * 0.2) + 
+														((tier_four_cents - tier_three_cents) * 0.3) + ((annual_salary_cents - tier_four_cents) * 0.4)
+			annual_tax_cents / 100 / 12
+		else
+
 		end
   end
 
