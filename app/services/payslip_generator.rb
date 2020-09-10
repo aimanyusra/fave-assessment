@@ -21,8 +21,8 @@ class PayslipGenerator
 
 		p "Monthly Payslip for: #{@employee_name}"
 		p "Gross Monthly Income: $#{gross_monthly_income(annual_salary_cents)}" 
-	 	p "Monthly Income Tax: $0"
-	 	p "Net Monthly Income: #{}"
+	 	p "Monthly Income Tax: $#{monthly_income_tax(annual_salary_cents)}"
+	 	p "Net Monthly Income: $#{net_monthly_income(annual_salary_cents)}"
   end
 
   def gross_monthly_income(annual_salary_cents)
@@ -30,26 +30,25 @@ class PayslipGenerator
   end
 
   def monthly_income_tax(annual_salary_cents)
-  	
   	case annual_salary_cents
   	when 0..2000000
-			p "Monthly Payslip for: #{@employee_name}"
-			p "Gross Monthly Income: $#{gross_monthly_income(annual_salary_cents)}" 
-		 	p "Monthly Income Tax: $0"
-		 	p "Net Monthly Income: #{}"
+  		return 0 * gross_monthly_income(annual_salary_cents).to_f
   	when 2000100..4000000
- 			p "kek"
+  		return '%.2f' % (gross_monthly_income(annual_salary_cents).to_f * 10 / 100)
   	when 4000100..8000000
-
+  		return '%.2f' % (gross_monthly_income(annual_salary_cents).to_f * 20 / 100)
   	when 8000100..18000000
-
-  	when annual_salary >= 18000100
-
+  		return '%.2f' % (gross_monthly_income(annual_salary_cents).to_f * 30 / 100)
   	else
+  		if annual_salary_cents >= 18000100
+  			return '%.2f' % (gross_monthly_income(annual_salary_cents).to_f * 40 / 100)
+  		else
+  			return "Not a valid number"
+  		end
 		end
   end
 
   def net_monthly_income(annual_salary_cents)
-  	
+  	'%.2f' % (gross_monthly_income(annual_salary_cents).to_f - monthly_income_tax(annual_salary_cents).to_f)
   end
 end
