@@ -51,7 +51,7 @@ class PayslipGenerator
 														((tier_four_cents - tier_three_cents) * 0.3) + ((annual_salary_cents - tier_four_cents) * 0.4)
 			annual_tax_cents / 100 / 12
 		else
-
+			'Not a valid number'
 		end
   end
 
