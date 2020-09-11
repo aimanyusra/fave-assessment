@@ -7,6 +7,7 @@ class PayslipGenerator
   end
 
   def generate
+  	return "Please input a valid amount" if @annual_salary_cents.negative?
   	calculate(@annual_salary_cents)
   end
 
