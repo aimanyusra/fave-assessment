@@ -40,14 +40,14 @@ class PayslipGenerator
 		elsif annual_salary_cents <= tier_two_cents
 			gross_monthly_income(annual_salary_cents).to_f * 0.1
 		elsif annual_salary_cents <= tier_three_cents
-			annual_tax_cents = (tier_one_cents * 0) + ((tier_two_cents - tier_one_cents) * 0.1) + ((annual_salary_cents - tier_two_cents) * 0.2)
+			annual_tax_cents = ((tier_two_cents - tier_one_cents) * 0.1) + ((annual_salary_cents - tier_two_cents) * 0.2)
 			annual_tax_cents / 100 / 12 #convert to month and dollars
 		elsif annual_salary_cents <= tier_four_cents
-			annual_tax_cents = (tier_one_cents * 0) + ((tier_two_cents - tier_one_cents) * 0.1) + ((tier_three_cents - tier_two_cents) * 0.2) + 
+			annual_tax_cents = ((tier_two_cents - tier_one_cents) * 0.1) + ((tier_three_cents - tier_two_cents) * 0.2) + 
 														((annual_salary_cents - tier_three_cents) * 0.3)
 			annual_tax_cents / 100 / 12
 		elsif annual_salary_cents > tier_four_cents
-			annual_tax_cents = (tier_one_cents * 0) + ((tier_two_cents - tier_one_cents) * 0.1) + ((tier_three_cents - tier_two_cents) * 0.2) + 
+			annual_tax_cents = ((tier_two_cents - tier_one_cents) * 0.1) + ((tier_three_cents - tier_two_cents) * 0.2) + 
 														((tier_four_cents - tier_three_cents) * 0.3) + ((annual_salary_cents - tier_four_cents) * 0.4)
 			annual_tax_cents / 100 / 12
 		else
