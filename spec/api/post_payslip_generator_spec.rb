@@ -1,5 +1,5 @@
 require 'rails_helper'
-describe "post payslip generator route", :type => :request do
+describe "post payslip generator route success", :type => :request do
   before do
     post '/api/payslip_generator', params: { employee_name: 'Ren', employee_salary: 60000 }
   end

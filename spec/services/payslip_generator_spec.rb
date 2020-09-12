@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe PayslipGenerator do
   describe '#generate' do
     it 'prints error message' do
-      PayslipGenerator.new('Ren', -1).generate.should eq("Please input a valid amount")
+      expect do
+        PayslipGenerator.new('Ren', -1).generate
+      end.to raise_error(RuntimeError)
     end
 
     it 'prints employee payslip' do

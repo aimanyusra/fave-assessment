@@ -3,7 +3,7 @@ class Api::PayslipGeneratorController < ApiController
 		salary_computations = []
 		SalaryRecord.all.each do |record|
 			obj = {
-				time_stamp: record.created_at.to_i,
+				time_stamp: record.created_at.to_i.to_s,
 				employee_name: record.employee_name,
 				annual_salary: record.annual_salary,
 				monthly_income_tax: record.monthly_income_tax
