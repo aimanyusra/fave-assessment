@@ -14,10 +14,21 @@ class PayslipGenerator
   private
 
   def calculate(annual_salary_cents)
+  	gross_monthly_income = "$#{'%.2f' % gross_monthly_income(annual_salary_cents).round}"
+  	monthly_income_tax = "$#{'%.2f' % monthly_income_tax(annual_salary_cents).round}"
+  	net_monthly_income = "$#{'%.2f' % net_monthly_income(annual_salary_cents)}"
+
 	 	puts "Monthly Payslip for: #{@employee_name}"
-	 	puts "Gross Monthly Income: $#{'%.2f' % gross_monthly_income(annual_salary_cents)}" 
-	  puts "Monthly Income Tax: $#{'%.2f' % monthly_income_tax(annual_salary_cents).round}"
-	  puts "Net Monthly Income: $#{'%.2f' % net_monthly_income(annual_salary_cents)}"
+	 	puts "Gross Monthly Income: #{gross_monthly_income}"
+	  puts "Monthly Income Tax: #{monthly_income_tax}"
+	  puts "Net Monthly Income: #{net_monthly_income}"
+
+	  return @payslip = {
+										  "employee_name": @employee_name,
+										  "gross_monthly_income": gross_monthly_income,
+										  "monthly_income_tax": monthly_income_tax,
+										  "net_monthly_income": net_monthly_income
+								  	}
   end
 
   def gross_monthly_income(annual_salary_cents)
