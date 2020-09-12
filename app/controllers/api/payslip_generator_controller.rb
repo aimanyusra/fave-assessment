@@ -17,7 +17,7 @@ class Api::PayslipGeneratorController < ApiController
 
 
 	def create
-		render json: PayslipGenerator.new(params[:employee_name], params[:employee_salary]).generate, status: 200
+		render json: PayslipGenerator.new(params[:employee_name], params[:employee_salary].to_i).generate, status: 200
 
 		if status == 200
 			body = JSON.parse response.body

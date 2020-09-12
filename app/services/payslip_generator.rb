@@ -3,15 +3,20 @@ class PayslipGenerator
 
   def initialize(employee_name, annual_salary)
   	@employee_name = employee_name
-  	@annual_salary_cents = annual_salary.to_i * 100
+  	@annual_salary_cents = validate_annual_salary(annual_salary)
   end
 
   def generate
-  	raise "Please input a valid amount" if @annual_salary_cents.negative?
   	calculate(@annual_salary_cents)
   end
 
   private
+
+  def validate_annual_salary(annual_salary)
+    raise "Please input a number" if !annual_salary.to_i.is_a?(Integer) || annual_salary.to_i == 0
+    raise "Please input a positive amount" if annual_salary.negative?
+    annual_salary.to_i * 100
+  end
 
   def calculate(annual_salary_cents)
   	gross_monthly_income = "$#{'%.2f' % gross_monthly_income(annual_salary_cents).round}"
