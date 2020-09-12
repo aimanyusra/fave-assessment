@@ -16,4 +16,7 @@ describe "post payslip generator route success", :type => :request do
   it 'returns the employee\'s net monthly income' do
     expect(JSON.parse(response.body)['net_monthly_income']).to eq('$4500.00')
   end
+  it 'returns HTTP success code' do
+    expect(response.status).to eq(200)
+  end
 end

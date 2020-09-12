@@ -14,7 +14,7 @@ class PayslipGenerator
 
   def validate_annual_salary(annual_salary)
     raise "Please input a number" if !annual_salary.to_i.is_a?(Integer) || annual_salary.to_i == 0
-    raise "Please input a positive amount" if annual_salary.negative?
+    raise "Please input a positive amount" if annual_salary.to_i.negative?
     annual_salary.to_i * 100
   end
 
