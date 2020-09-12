@@ -14,7 +14,7 @@ class PayslipGenerator
   private
 
   def calculate(annual_salary_cents)
-  	gross_monthly_income = "$#{'%.2f' % gross_monthly_income(annual_salary_cents)}"
+  	gross_monthly_income = "$#{'%.2f' % gross_monthly_income(annual_salary_cents).round}"
   	monthly_income_tax = "$#{'%.2f' % monthly_income_tax(annual_salary_cents).round}"
   	net_monthly_income = "$#{'%.2f' % net_monthly_income(annual_salary_cents)}"
 
