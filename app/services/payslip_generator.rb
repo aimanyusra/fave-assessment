@@ -44,28 +44,23 @@ class PayslipGenerator
   def monthly_income_tax(annual_salary_cents)
   	brackets = [
 			{
-				min_treshold: 0,
-				max_treshold: 2000000,
+				min_treshold_cents: 0,
 				tax: 0
 			},
 			{
-				min_treshold: 2000100,
-				max_treshold: 4000000,
+				min_treshold_cents: 2000100,
 				tax: 0.1
 			},
 			{
-				min_treshold: 4000100,
-				max_treshold: 8000000,
+				min_treshold_cents: 4000100,
 				tax: 0.2
 			},
 			{
-				min_treshold: 8000100,
-				max_treshold: 18000000,
+				min_treshold_cents: 8000100,
 				tax: 0.3
 			},
 			{
-				min_treshold: 18000100,
-				max_treshold: 18000100..,
+				min_treshold_cents: 18000100,
 				tax: 0.4
 			}
 		]
@@ -73,8 +68,8 @@ class PayslipGenerator
 	  total_tax = 0
     
 		brackets.reverse.each do |bracket|
-			if annual_salary_cents >= bracket[:min_treshold]
-				portion = annual_salary_cents - bracket[:min_treshold]
+			if annual_salary_cents >= bracket[:min_treshold_cents]
+				portion = annual_salary_cents - bracket[:min_treshold_cents]
 				total_tax += bracket[:tax] * portion
 				annual_salary_cents -= portion
 			end
