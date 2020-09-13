@@ -10,7 +10,6 @@ RSpec.describe Api::PayslipGeneratorController do
     end
     it "JSON body response contains expected recipe attributes" do
       res = JSON.parse(response.body)
-      byebug
       expect(res.keys).to match_array(["salary_computations"])
     end
   end
