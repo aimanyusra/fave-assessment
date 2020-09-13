@@ -5,13 +5,19 @@ RSpec.describe PayslipGenerator do
     it 'prints error message if input is negative' do
       expect do
         PayslipGenerator.new('Ren', -1).generate
-      end.to raise_error(RuntimeError, "Please input a positive amount")
+      end.to raise_error(ArgumentError, "Annual salary is not positive")
     end
 
     it 'prints error message if input is not a number' do
       expect do
         PayslipGenerator.new('Ren', "abc").generate
-      end.to raise_error(RuntimeError, "Please input a number")
+      end.to raise_error(ArgumentError, "Annual salary is not a number")
+    end
+
+    it 'prints error message if input is 0' do
+      expect do
+        PayslipGenerator.new('Ren', 0).generate
+      end.to raise_error(ArgumentError, "Annual salary should not be 0")
     end
 
     it 'prints employee payslip' do
