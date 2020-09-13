@@ -45,23 +45,23 @@ class PayslipGenerator
   	brackets = [
 			{
 				min_treshold_cents: 0,
-				tax: 0
+				tax_rate: 0
 			},
 			{
 				min_treshold_cents: 2000100,
-				tax: 0.1
+				tax_rate: 0.1
 			},
 			{
 				min_treshold_cents: 4000100,
-				tax: 0.2
+				tax_rate: 0.2
 			},
 			{
 				min_treshold_cents: 8000100,
-				tax: 0.3
+				tax_rate: 0.3
 			},
 			{
 				min_treshold_cents: 18000100,
-				tax: 0.4
+				tax_rate: 0.4
 			}
 		]
 
@@ -70,7 +70,7 @@ class PayslipGenerator
 		brackets.reverse.each do |bracket|
 			if annual_salary_cents >= bracket[:min_treshold_cents]
 				portion = annual_salary_cents - bracket[:min_treshold_cents]
-				total_tax += bracket[:tax] * portion
+				total_tax += bracket[:tax_rate] * portion
 				annual_salary_cents -= portion
 			end
 		end
