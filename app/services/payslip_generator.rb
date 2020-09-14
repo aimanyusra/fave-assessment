@@ -14,7 +14,7 @@ class PayslipGenerator
 
   def validate_annual_salary(annual_salary)
     raise ArgumentError, "Annual salary should not be 0" unless annual_salary != 0
-    raise ArgumentError, "Annual salary is not a number" unless annual_salary.to_i.is_a? Numeric 
+    raise ArgumentError, "Annual salary is not a number" unless (annual_salary.to_i.is_a? Numeric) && annual_salary.to_i != 0
     raise ArgumentError, "Annual salary is not positive" unless annual_salary.to_i.positive?  
     annual_salary.to_i * 100
   end

@@ -10,7 +10,7 @@ RSpec.describe PayslipGenerator do
 
     it 'prints error message if input is not a number' do
       expect do
-        PayslipGenerator.new('Ren', "abc").generate
+        PayslipGenerator.new('Ren', 'abc').generate
       end.to raise_error(ArgumentError, "Annual salary is not a number")
     end
 
