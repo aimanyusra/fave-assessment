@@ -1,7 +1,8 @@
 require 'rails_helper'
-describe "post payslip generator route", :type => :request do
-  before do
-    post '/api/payslip_generator', params: { employee_name: 'Ren', employee_salary: 60000 }
+
+RSpec.describe Api::PayslipGeneratorController do
+  before "POST #generate" do
+    post '/api/payslip_generator/generate', params: { employee_name: 'Ren', employee_salary: 60000 }
   end
 
   it 'returns the employee name' do
@@ -15,5 +16,8 @@ describe "post payslip generator route", :type => :request do
   end
   it 'returns the employee\'s net monthly income' do
     expect(JSON.parse(response.body)['net_monthly_income']).to eq('$4500.00')
+  end
+  it 'returns HTTP success code' do
+    expect(response.status).to eq(200)
   end
 end
