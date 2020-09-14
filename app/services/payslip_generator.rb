@@ -14,13 +14,13 @@ class PayslipGenerator
 
   def validate_annual_salary(annual_salary)
     raise ArgumentError, "Annual salary should not be 0" unless annual_salary != 0
-    raise ArgumentError, "Annual salary is not a number" unless annual_salary.is_a? Numeric 
+    raise ArgumentError, "Annual salary is not a number" unless (annual_salary.to_i.is_a? Numeric) && annual_salary.to_i != 0
     raise ArgumentError, "Annual salary is not positive" unless annual_salary.to_i.positive?  
     annual_salary.to_i * 100
   end
 
   def calculate(annual_salary_cents)
-    gross_monthly_income = "$#{gross_monthly_income(annual_salary_cents)}"
+    gross_monthly_income = "$#{salary_to_cents(gross_monthly_income(annual_salary_cents))}"
     monthly_income_tax = "$#{salary_to_cents(monthly_income_tax(annual_salary_cents))}"
     net_monthly_income = "$#{salary_to_cents(net_monthly_income(annual_salary_cents))}"
 
@@ -74,11 +74,11 @@ class PayslipGenerator
         annual_salary_cents -= portion
       end
     end
-    monthly_tax = total_tax / 12 / 100.0 #convert to monthly and dollars
+    monthly_tax = total_tax / 12 / 100.00 #convert to monthly and dollars
   end
 
   def net_monthly_income(annual_salary_cents)
-    ((gross_monthly_income(annual_salary_cents).to_f - monthly_income_tax(annual_salary_cents).to_f))
+    (gross_monthly_income(annual_salary_cents).to_f - monthly_income_tax(annual_salary_cents).to_f)
   end
 
   def salary_to_cents(amount)
